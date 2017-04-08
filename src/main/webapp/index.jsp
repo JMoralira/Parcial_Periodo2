@@ -1,16 +1,19 @@
-<%@page import="java.util.Base64"%>
-<%@page import="com.sv.udb.controlador.EquiposCtrl"%>
-<%@page import="com.sv.udb.modelo.Equipos"%>
-<%@page import="com.sv.udb.controlador.JugadoresCtrl"%>
-<%@page import="com.sv.udb.modelo.Jugadores"%>
+<%-- 
+    Document   : bodega
+    Created on : 04-08-2017, 10:27:17 AM
+    Author     : Jose Lira
+--%>
+<%@page import="com.sv.udb.controlador.BodegaCtrl"%>
+<%@page import="com.sv.udb.modelo.Bodega"%>
+<%@page import="com.sv.udb.controlador.PiezasCtrl"%>
+<%@page import="com.sv.udb.modelo.Piezas"%>
+<%@page import="com.sv.udb.controlador.ProveedoresCtrl"%>
+<%@page import="com.sv.udb.modelo.Proveedores"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel='stylesheet' href='webjars/materialize/0.97.3/dist/css/materialize.min.css'>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.min.js"></script>
@@ -19,100 +22,87 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <div class="container">
-         <form method="POST" action="JugadoresServ" name="DEMO" enctype="multipart/form-data">
+        <div class="container">
+         <form method="POST" action="BodegaServ" name="DEMO" enctype="multipart/form-data">
         <h1>${mensAler}</h1>
         <label>Codigo:</label>
         <input type="text" name="codi" id="codi" value="${codi}" readonly> <br>
-        <label>Id Equipo:</label>
-        <select id="cmbEquipo" name="cmbEquipo" value="${cmbEquipo}">
+        <label>Id Piezas:</label>
+        <select id="cmbPiezas" name="cmbPiezas" value="${cmbPiezas}">
             
-            <option  disabled selected> Seleccione un equipo</option>
+            <option  disabled selected> Seleccione una Pieza</option>
             <%                
-                for(Equipos temp : new EquiposCtrl().consTodo())
+                for(Piezas temp : new PiezasCtrl().consTodo())
                 {
             %>
-            <option value="<%=temp.getCodiEqui()%>"><%=temp.getNombEqui()%></option>;
+            <option value="<%=temp.getCodiPiez()%>"><%=temp.getNombPiez()%></option>;
             <%
                 }
             %>
         </select> <br>
-        <label>Nombre:</label>
-        <input type="text" name="nomb" id="nomb" value="${nomb}" required> <br>
-        <label>Edad:</label>
-        <input type="text" name="edad" id="edad" value="${edad}" required> <br>
-        <label>Altura:</label>
-        <input type="text" name="altu" id="altu" value="${altu}" required> <br>
-        <label>Peso:</label>
-        <input type="text" name="peso" id="peso" value="${peso}" required> 
+        <label>Id Proveedores</label>
+        <select id="cmbProveedores" name="cmbProveedores" value="${cmbProveedores}">
+            
+            <option  disabled selected> Seleccione un Proveedor</option>
+            <%                
+                for(Proveedores temp : new ProveedoresCtrl().consTodo())
+                {
+            %>
+            <option value="<%=temp.getCodiProv()%>"><%=temp.getNombProv()%></option>;
+            <%
+                }
+            %>
+        </select> <br>
+        <label>Cantidad:</label>
+        <input type="text" name="cant" id="cant" value="${cant}" required> <br>
+        <label>Fecha:</label>
+        <input type="text" name="fech" id="fech" value="${fech}" required> <br>
         
-          <div class="input-field col s12 m12 l12">
-            <div class="file-field input-field">
-            <button class="btn">
-         <i class="material-icons">insert_photo</i>
-        <input type='file' name='imagen' id="img"/> 
-        </button>
-                <div class="file-path-wrapper">
-                            <input class="file-path validate" name="ima" type="text" value="${ima}" placeholder='1200x1200px máx., 2MB máx., PNG/JPG/GIF '>
-                </div> 
-        </div>
-        </div>
+          
       
-                <button class="btn waves-effect waves-light" type="submit" name="btoJuga" value="Guardar">Guardar
+                <button class="btn waves-effect waves-light" type="submit" name="btoBode" value="Guardar">Guardar
                 <i class="material-icons right">send</i>
                 </button>
-                <button class="btn waves-effect waves-light" type="submit" name="btoJuga" value="Modificar">Modificar
-                <i class="material-icons right">send</i>
-                </button>
-                <button class="btn waves-effect waves-light" type="submit" name="btoJuga" value="Eliminar">Eliminar
-                <i class="material-icons right">send</i>
-                </button>
-                <button class="btn waves-effect waves-light" type="submit" name="btoJuga" value="Nuevo">Nuevo 
-                <i class="material-icons right">send</i>
-                </button>
+               
         <ul>
-            <li><a href="index.jsp">Equipos</a></li>
+            <li><a href="piezas.jsp">Piezas</a></li>
+            <li><a href="proveedores.jsp">Proveedores</a></li>
         </ul>
         </form>
         
         <h1>La Tabla</h1>
-        <form method="POST" action="JugadoresServ" name="TABLA">
+        <form method="POST" action="BodegaServ" name="TABLA">
         <table border="1">
             <thead>
             <tr>
                 <th>Cons</th>
-                <th>Id Equipo</th>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Altura</th>
-                <th>Peso</th>
-                <th>Imagen</th>
+                <th>Piezas</th>
+                <th>Proveedores</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                
             </tr>
             </thead>
             <tbody>
             <%
-            for (Jugadores temp : new JugadoresCtrl().constTodo())
+            for (Bodega temp : new BodegaCtrl().consTodo())
             {
-                 byte[] photo = temp.getImag();
-                    String bphoto = Base64.getEncoder().encodeToString(photo);
-
+               
             %>
             <tr>
-                <td><p><input type="radio" name="codiJugaRadi" value="<%= temp.getCodiJuga() %>" id="<%= temp.getCodiJuga() %>"/>
-                        <label for="<%=temp.getCodiJuga()%>"></label></p></td>
-                <td><%= temp.getCodiEqui() %></td>
-                <td><%= temp.getNombJuga() %></td>
-                <td><%= temp.getEdadJuga() %></td>
-                <td><%= temp.getAltuJuga() %></td>
-                <td><%= temp.getPesoJuga() %></td>
-                <td><img src="data:image/*;base64,<%=bphoto%>" class="materialboxed" width="100" height="100"></td>
+                <td><p><input type="radio" name="codiBodeRadi" value="<%= temp.getCodiBode()%>" id="<%= temp.getCodiBode() %>"/>
+                        <label for="<%=temp.getCodiBode()%>"></label></p></td>
+                <td><%= temp.getPiez()%></td>
+                <td><%= temp.getProv()%></td>
+                <td><%= temp.getCant() %></td>
+                <td><%= temp.getFech() %></td>
             </tr>
             <%
             }
             %>
             </tbody>
         </table>
-            <button class="btn waves-effect waves-light" type="submit" name="btoJuga" value="Consultar">Consultar
+            <button class="btn waves-effect waves-light" type="submit" name="btoBode" value="Consultar">Consultar
             <i class="material-icons right">send</i>
             </button>
         </form>
@@ -123,5 +113,4 @@
           });
     </script>
     </body>
-
 </html>

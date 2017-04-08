@@ -43,7 +43,7 @@
                 <i class="material-icons right">send</i>
                 </button>
         <ul>
-            <li><a href="bodega.jsp">Bodegas</a></li>
+            <li><a href="index.jsp">Bodegas</a></li>
             <li><a href="proveedores.jsp">Proveedores</a></li>
             
         </ul>            

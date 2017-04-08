@@ -21,13 +21,16 @@ public class Bodega {
     public Bodega(){
     }
 
-    public Bodega(int codiBode, String piez, String prov, int cant, String fech) {
+    public Bodega(int codiBode, int codiPiez, int codiProv, int cant, String fech, String prov, String piez) {
         this.codiBode = codiBode;
-        this.piez = piez;
-        this.prov = prov;        
+        this.codiPiez = codiPiez;
+        this.codiProv = codiProv;
         this.cant = cant;
         this.fech = fech;
+        this.prov = prov;
+        this.piez = piez;
     }
+
 
     
 

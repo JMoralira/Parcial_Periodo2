@@ -62,11 +62,11 @@ public class BodegaCtrl {
         Connection cn = new Conexion().getConn();
         try 
         {
-            PreparedStatement cmd = cn.prepareStatement("select piezas.nomb_piez, proveedores.nomb_prov, bodega.cant, bodega.fech from piezas,bodega, proveedores where bodega.codi_piez = piezas.codi_piez and bodega.codi_prov = proveedores.codi_prov;");
+            PreparedStatement cmd = cn.prepareStatement("select bodega.codi_bode, bodega.codi_piez, bodega.codi_prov, bodega.cant, bodega.fech, proveedores.nomb_prov, piezas.nomb_piez from piezas,bodega, proveedores where bodega.codi_piez = piezas.codi_piez and bodega.codi_prov = proveedores.codi_prov;");
             ResultSet rs = cmd.executeQuery();
             while(rs.next())
-            {
-                resp.add(new Bodega(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5)));               
+            {                
+                resp.add(new Bodega (rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7)));               
             }
         } catch (Exception err) {
             err.printStackTrace();
@@ -96,12 +96,12 @@ public class BodegaCtrl {
         try 
         {
             
-            PreparedStatement cmd = cn.prepareStatement("select piezas.nomb_piez, proveedores.nomb_prov, bodega.cant, bodega.fech from piezas,bodega, proveedores where bodega.codi_piez = piezas.codi_piez and bodega.codi_prov = proveedores.codi_prov and codi_bode = ?");
+            PreparedStatement cmd = cn.prepareStatement("select bodega.codi_bode, bodega.codi_piez, bodega.codi_prov, bodega.cant, bodega.fech, proveedores.nomb_prov, piezas.nomb_piez from piezas,bodega, proveedores where bodega.codi_piez = piezas.codi_piez and bodega.codi_prov = proveedores.codi_prov and codi_bode = ?");
             cmd.setString(1, String.valueOf(codi));
             ResultSet rs = cmd.executeQuery();
             while(rs.next())
             {                
-                 resp = (new Bodega(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5)));               
+                 resp = (new Bodega(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7)));
             }
         } catch (Exception err) {
             err.printStackTrace();

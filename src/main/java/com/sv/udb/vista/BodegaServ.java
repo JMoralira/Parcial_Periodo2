@@ -47,7 +47,7 @@ public class BodegaServ extends HttpServlet {
        String mens = "";
        if(!esValido)
        {
-           response.sendRedirect(request.getContextPath()+"/bodega.jsp");
+           response.sendRedirect(request.getContextPath()+"/index.jsp");
        }
        else
        {
@@ -95,7 +95,7 @@ public class BodegaServ extends HttpServlet {
                        request.setAttribute("fech", "");                               
                    }
            request.setAttribute("mensAler", mens);
-           request.getRequestDispatcher("/bodega.jsp").forward(request, response);
+           request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 
